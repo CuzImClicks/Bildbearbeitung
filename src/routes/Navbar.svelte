@@ -94,10 +94,6 @@
     ]
 </script>
 
-<svelte:head>
-    <!-- You can change icon sets according to your taste. Change `class` value in `menuItems` above to represent your icons. -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</svelte:head>
 <nav>
     <div class="w-full h-max border-b-[2px]">
         <ul class="flex flex-row">
@@ -114,7 +110,7 @@
                             {#each category.children as item}
                                 <li class="w-full hover:bg-gray-400">
                                     <button class="w-full text-left text-xl p-2" on:click={item.onClick} on:click={() => category.visible = false}>
-                                        <i class={item.iconClass}></i>{item.display}
+                                        {item.display}
                                     </button>
                                 </li>
                             {/each}
