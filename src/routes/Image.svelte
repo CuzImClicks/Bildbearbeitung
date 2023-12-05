@@ -1,19 +1,31 @@
 <script lang="ts">
-    import { split } from "postcss/lib/list";
-import Pixel from "./Pixel.svelte";
+    import Pixel from "./Pixel.svelte";
+    import {scale} from "svelte/transition";
 
-    export let image: Array<Array<string>>;
+    export let image: Array<Array<Array<number>>>;
+    export let size: number;
+    let sc = 10;
+
+    function zoom(event: WheelEvent) {
+        if (!event.ctrlKey) return;
+        event.preventDefault();
+
+        sc += event.deltaY * -0.1;
+        sc = Math.min(Math.max(10, sc), 100);
+    }
 </script>
 
-<div class="flex bg-gray-100 h-full w-full">
+<div class="flex justify-center items-center flex-col bg-gray-100 h-full w-full" on:wheel={zoom}>
     {#each image as row}
-        {#each row as pixel}
-            <Pixel 
-                r={parseInt(pixel.split(" ")[0])} 
-                g={parseInt(pixel.split(" ")[0])} 
-                b={parseInt(pixel.split(" ")[0])}
-                size={1}
-            />
-        {/each}
+        <div class="flex">
+            {#each row as pixel}
+                <Pixel
+                    bind:r={pixel[0]}
+                    bind:g={pixel[1]}
+                    bind:b={pixel[2]}
+                    bind:size={sc}
+                />
+            {/each}
+        </div>
     {/each}
 </div>

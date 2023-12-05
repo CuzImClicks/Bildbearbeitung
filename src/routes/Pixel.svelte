@@ -1,9 +1,14 @@
 <script lang="ts">
+
+    import {blue, green, red} from "./store";
+
     export let r: number;
     export let g: number;
     export let b: number;
     export let size: number;
 </script>
 
-<div style="height: {size*10}px; width: {size*10}px; background-color: rgb({r}, {g}, {b});">
+<div class="border-none caret-transparent p-0 m-0 cursor-crosshair" style="height: {size}px; width: {size}px; background-color: rgb({r}, {g}, {b});"
+     on:click="{() => {r=$red; g=$green; b=$blue}}"
+     role="img">
 </div>

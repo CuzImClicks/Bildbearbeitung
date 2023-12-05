@@ -1,38 +1,66 @@
-# create-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+- [ ] slider
+- [ ] invert color
+- [ ] color picker
+- [ ] draggable
+- [ ] brush
+- [ ] pan
+- [ ] zoom
+- [ ] new with size
 
-## Creating a project
+german flag
 
-If you're seeing this, you've probably already done this step. Congrats!
+```
+0 0 0;0 0 0;0 0 0;0 0 0;0 0 0
+255 0 0;255 0 0;255 0 0;255 0 0;255 0 0
+255 204 0;255 204 0;255 204 0;255 204 0;255 204 0
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```
+255 0 0;255 0 0;255 0 0;255 0 0;255 0 0
+255 0 0;255 0 0;255 0 0;255 0 0;255 0 0
+255 0 0;255 0 0;255 0 0;255 0 0;255 0 0
 ```
 
-## Building
+https://svelte.dev/repl/6fb90919e24942b2b47d9ad154386b0c?version=3.49.0
 
-To create a production version of your app:
 
-```bash
-npm run build
+old load
+```sveltehtml
+<div class="absolute w-full h-10 p-4">
+    <button class="bg-blue-400 p-2 rounded-xl" on:click={() =>
+        navigator.clipboard.readText()
+            .then(((t) => {
+                image = t.trim().replace("\r", "").split("\n").map((row) =>
+                    row.trim().replace(/;$/, "").split(";").map((pixel) =>
+                    pixel.trim().split(" ").map((color) => parseInt(color, 10))
+                    )
+                );
+            }))}>
+        Import
+    </button>
+    <button class="bg-blue-400 p-2 rounded-xl" on:click={() => {
+            navigator.clipboard.writeText(
+                image.map((row) => row.map((pixel) => pixel.join(" ")).join(";")).join("\n")
+            );
+        }
+    }>
+        Export
+    </button>
+</div>
 ```
 
-You can preview the production build with `npm run preview`.
+```sveltehtml
+<div class="flex flex-col items-center">
+    <button class="bg-blue-400 p-2 w-full rounded-xl my-1" on:click={() => size += 1}>+</button>
+    <button class="bg-blue-400 p-2 w-full rounded-xl my-1" on:click={() => size -= 1}>-</button>
+</div>
+```
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+```sveltehtml
+        <div class="relative left-0 top-1/2 h-max w-max p-8 text-xl bg-gray-300 mr-4 rounded flex flex-col">
+            <div class="border-b-2 mb-2">Henrik, Kai</div>
+        </div>
+```
