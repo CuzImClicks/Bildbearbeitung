@@ -1,6 +1,5 @@
 <script lang="ts">
     import Pixel from "./Pixel.svelte";
-    import {scale} from "svelte/transition";
 
     export let image: Array<Array<Array<number>>>;
     export let size: number;

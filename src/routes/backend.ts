@@ -29,3 +29,14 @@ export function mirrorDiagonally(image: Array<Array<Array<number>>>): Array<Arra
     }
     return newImage
 }
+
+export function rotate(image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+    const newImage: Array<Array<Array<number>>> = []
+    for (let i = 0; i < image[0].length; i++) {
+        newImage.push([])
+        for (let j = 0; j < image.length; j++) {
+            newImage[i][j] = image[image.length - (j + 1)][i]
+        }
+    }
+    return newImage
+}

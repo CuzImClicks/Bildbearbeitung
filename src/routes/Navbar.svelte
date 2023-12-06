@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {mirrorDiagonally, mirrorHorizontally, mirrorVertically} from "./backend";
+    import {mirrorDiagonally, mirrorHorizontally, mirrorVertically, rotate} from "./backend";
 
     export let image: Array<Array<Array<number>>>;
     type MenuCategory = {
@@ -40,11 +40,17 @@
                     onClick: () => {
                         navigator.clipboard.readText()
                             .then(((t) => {
-                                image = t.trim().replace("\r", "").split("\n").map((row) =>
+                                let temp = t.trim().replace("\r", "").split("\n").map((row) =>
                                     row.trim().replace(/;$/, "").split(";").map((pixel) =>
                                         pixel.trim().split(" ").map((color) => parseInt(color, 10))
                                     )
                                 );
+                                let len = temp[0].length;
+                                let prev = true;
+                                if (!temp.flatMap((it) => it.length == len).reduce((prev, cur) => prev && cur, prev)) {
+                                    return;
+                                }
+                                image = temp;
                             }))
                     },
                     display: "Load from clipboard",
@@ -88,6 +94,13 @@
                         image = mirrorDiagonally(image)
                     },
                     display: "Flip Diagonally",
+                },
+                {
+                    name: "rotate",
+                    onClick: () => {
+                        image = rotate(image)
+                    },
+                    display: "Rotate clockwise",
                 },
             ]
         },
