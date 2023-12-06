@@ -2,7 +2,6 @@
     import Pixel from "./Pixel.svelte";
 
     export let image: Array<Array<Array<number>>>;
-    export let size: number;
     let sc = 10;
 
     function zoom(event: WheelEvent) {

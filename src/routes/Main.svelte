@@ -20,7 +20,7 @@ import Image from "./Image.svelte";
     <Navbar bind:image={image}/>
     <div class="w-full h-full overflow-visible">
         {#if image != null && image !== undefined}
-            <Image bind:image={image} bind:size={size}/>
+            <Image bind:image={image}/>
         {/if}
     </div>
 </div>
