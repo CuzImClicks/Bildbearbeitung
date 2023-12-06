@@ -1,6 +1,7 @@
 
 <script lang="ts">
-    import Image from "./Image.svelte";
+    import ColorSelector from "./ColorSelector.svelte";
+import Image from "./Image.svelte";
     import Navbar from "./Navbar.svelte";
 
     let image: Array<Array<Array<number>>> = [[[]]]
@@ -14,7 +15,7 @@
 
 </script>
 
-
+<ColorSelector />
 <div class="h-screen w-full overflow-hidden">
     <Navbar bind:image={image}/>
     <div class="w-full h-full overflow-visible">
