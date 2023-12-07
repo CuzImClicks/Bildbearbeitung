@@ -3,6 +3,7 @@
     import ColorSelector from "./ColorSelector.svelte";
 import Image from "./Image.svelte";
     import Navbar from "./Navbar.svelte";
+    import { dragging } from "./store";
 
     let image: Array<Array<Array<number>>> = [[[]]]
         //[
@@ -16,7 +17,7 @@ import Image from "./Image.svelte";
 </script>
 
 <ColorSelector />
-<div class="h-screen w-full overflow-hidden">
+<div class="h-screen w-full overflow-hidden" on:mouseup={() => $dragging = false}>
     <Navbar bind:image={image}/>
     <div class="w-full h-full overflow-visible">
         {#if image != null && image !== undefined}
