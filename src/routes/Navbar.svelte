@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {mirrorDiagonally, mirrorHorizontally, mirrorVertically, rotate} from "./backend";
+    import {blackAndWhite, invertColors, mirrorDiagonally, mirrorHorizontally, mirrorVertically, rotate} from "./backend";
 
     export let image: Array<Array<Array<number>>>;
     type MenuCategory = {
@@ -101,6 +101,20 @@
                         image = rotate(image)
                     },
                     display: "Rotate clockwise",
+                },
+                {
+                    name: "black and white",
+                    onClick: () => {
+                        image = blackAndWhite(image)
+                    },
+                    display: "Black and white",
+                },
+                {
+                    name: "invert colors",
+                    onClick: () => {
+                        image = invertColors(image)
+                    },
+                    display: "Invert colors",
                 },
             ]
         },

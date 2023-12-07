@@ -40,3 +40,23 @@ export function rotate(image: Array<Array<Array<number>>>): Array<Array<Array<nu
     }
     return newImage
 }
+
+export function blackAndWhite(image:Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+    for (let i = 0; i < image.length; i++) {
+        for (let j = 0; j < image[0].length; j++) {
+            let prev = 0;
+            let value = image[i][j].reduce((prev, cur) => prev += cur, prev) / image[i][j].length;
+            image[i][j] = [value, value, value];
+        }
+    }
+    return image;
+}
+
+export function invertColors(image:Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+    for (let i = 0; i < image.length; i++) {
+        for (let j = 0; j < image[0].length; j++) {
+            image[i][j] = image[i][j].flatMap((it) => 255 - it);
+        }
+    }
+    return image;
+}
