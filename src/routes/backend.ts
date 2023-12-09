@@ -1,3 +1,5 @@
+import { get } from "svelte/store"
+import { blue, green, red } from "./store"
 
 export function mirrorVertically(image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     for (let i = 0; i < image.length / 2; i++) {
@@ -56,6 +58,21 @@ export function invertColors(image:Array<Array<Array<number>>>): Array<Array<Arr
     for (let i = 0; i < image.length; i++) {
         for (let j = 0; j < image[0].length; j++) {
             image[i][j] = image[i][j].flatMap((it) => 255 - it);
+        }
+    }
+    return image;
+}
+
+export function brush(x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+    let minX = 0;//Math.max(x-brushSize, 0);
+    let maxX = image[0].length//Math.min(x+brushSize, image[0].length);
+    let minY = 0;//Math.max(y-brushSize, 0);
+    let maxY = image.length;//Math.min(x+brushSize, image.length);
+    for (let i = minY; i<maxY; i++) {
+        for (let j = minX; j < maxX; j++) {
+            if (Math.sqrt(((i-y)**2)+((j-x)**2)) <= brushSize) {
+                image[i][j] = [get(red), get(green), get(blue)];
+            }
         }
     }
     return image;

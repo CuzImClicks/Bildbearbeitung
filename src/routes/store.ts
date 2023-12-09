@@ -5,3 +5,4 @@ export const red = writable(0);
 export const green = writable(0);
 export const blue = writable(0);
 export const dragging = writable(false);
+export const brushSize = writable(2);

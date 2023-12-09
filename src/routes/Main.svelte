@@ -1,7 +1,7 @@
 
 <script lang="ts">
     import ColorSelector from "./ColorSelector.svelte";
-import Image from "./Image.svelte";
+    import Image from "./Image.svelte";
     import Navbar from "./Navbar.svelte";
     import { dragging } from "./store";
 
