@@ -1,12 +1,18 @@
 
 - [ ] slider
-- [ ] invert color
-- [ ] color picker
-- [ ] draggable
-- [ ] brush
-- [ ] pan
-- [ ] zoom
-- [ ] new with size
+- [ ] brush settings
+- [ ] zoom speed
+- [ ] black and white 
+- [x] invert color
+- [x] color picker
+- [x] draggable
+- [x] brush
+- [x] pan
+- [x] zoom
+- [x] new with size
+
+all menu items -> z-50
+image and backdrop -> -z-50
 
 german flag
 

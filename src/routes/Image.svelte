@@ -1,7 +1,8 @@
 <script lang="ts">
     import Pixel from "./Pixel.svelte";
+    import {image, innerHeight, innerWidth} from "./store";
+    import Scrollable from "./Scrollable.svelte";
 
-    export let image: Array<Array<Array<number>>>;
     let sc = 10;
 
     function zoom(event: WheelEvent) {
@@ -9,35 +10,26 @@
         event.preventDefault();
 
         sc += event.deltaY * -0.1;
-        sc = Math.min(Math.max(10, sc), 100);
+        sc = Math.min(Math.max(1, sc), 100);
     }
 </script>
 
-<div class="flex justify-center items-center flex-col bg-gray-100 h-full w-full" on:wheel={zoom}>
-    {#each image as row, y}
-        <div class="flex">
-            {#each row as pixel, x}
-                <Pixel
-                    bind:r={pixel[0]}
-                    bind:g={pixel[1]}
-                    bind:b={pixel[2]}
-                    bind:size={sc}
-                    x={x}
-                    y={y}
-                    bind:image={image}
-                />
-                <script lang="ts">
-                    y+=1;
-                </script>
-            {/each}
-        </div>
-        <script lang="ts">
-            x+=1;
-            y=0;
-        </script>
-    {/each}
-    <script lang="ts">
-        x=0;
-        y=0;
-    </script>
-</div>
+<Scrollable top={$innerHeight / 2} left={$innerWidth / 2} translateX={true} translateY={true}
+            horizontalScrolling={true}>
+    <div class="flex justify-center items-center flex-col bg-gray-100 h-full w-full divide-y divide-gray-400 divide-opacity-50"
+         on:wheel={zoom}>
+        {#each $image as row, y}
+            <div class="flex divide-x divide-gray-400 divide-opacity-50">
+                {#each row as pixel, x}
+                    <Pixel bind:r={pixel[0]}
+                           bind:g={pixel[1]}
+                           bind:b={pixel[2]}
+                           bind:size={sc}
+                           x={x}
+                           y={y}
+                    />
+                {/each}
+            </div>
+        {/each}
+    </div>
+</Scrollable>
