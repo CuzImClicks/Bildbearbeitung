@@ -66,7 +66,7 @@ export function darken(percentage: number, image:Array<Array<Array<number>>>): A
 export function invertColors(image:Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     for (let i = 0; i < image.length; i++) {
         for (let j = 0; j < image[0].length; j++) {
-            image[i][j] = image[i][j].flatMap((it) => 255 - it);
+            image[i][j] = image[i][j].map((it) => 255 - it);
         }
     }
     return image;

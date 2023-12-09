@@ -9,9 +9,9 @@
         rotate
     } from "./backend";
     import {brushes} from "./brushes";
-    import {brushType, darkenPercentage, image, innerHeight, innerWidth} from "./store";
-    import Draggable from "./Draggable.svelte";
+    import {brushType, darkenPercentage, image} from "./store";
     import NewImageMenu from "./NewImageMenu.svelte";
+    import type {Brush} from "./brushes";
 
     type MenuCategory = {
         name: string,
@@ -144,7 +144,7 @@
             display: "Brush",
             action: () => {},
             visible: brushesMenuVisible,
-            children: brushes.map((brush) => ({
+            children: brushes.map((brush: Brush) => ({
                 name: brush.name,
                 onClick: () => {
                     $brushType = brush.brushType;

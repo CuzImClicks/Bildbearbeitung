@@ -1,13 +1,13 @@
 import {blue, brushType, green, red} from "./store";
 import {get} from "svelte/store";
 
-type Brush = {
+export type Brush = {
     name: string,
     brush: (x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>) => Array<Array<Array<number>>>,
     brushType: string
 }
 
-export const brushes = [
+export const brushes: Array<Brush> = [
     {
         name: 'Circle',
         brush: circleBrush,

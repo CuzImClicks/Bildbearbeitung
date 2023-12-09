@@ -6,7 +6,7 @@ export const red = writable(0);
 export const green = writable(0);
 export const blue = writable(0);
 export const dragging = writable(false);
-export const darkenPercentage = writable(0.2);
+export const darkenPercentage = writable(20);
 
 export const brushSize = writable(1);
 export const brushType = writable('circle');
