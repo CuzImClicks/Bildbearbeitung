@@ -1,6 +1,6 @@
 <script lang="ts">
     import ColorSelectorPixel from "./ColorSelectorPixel.svelte";
-    import {blue, green, red, outerHeight} from "./store";
+    import {blue, green, red, innerHeight} from "./store";
     import Draggable from "./Draggable.svelte";
 
     let colors = [
@@ -23,9 +23,9 @@
     let customVisible = false;
 </script>
 
-{#if $outerHeight > 0}
-        <Draggable left={0} top={($outerHeight / 2)}>
-            <div class="">
+{#if $innerHeight > 0}
+        <Draggable left={0} top={($innerHeight / 2)}>
+            <div class="-translate-y-1/2">
                 {#each colors as color}
                     <ColorSelectorPixel bind:r={color[0]} bind:g={color[1]} bind:b={color[2]} size={15}/>
                 {/each}

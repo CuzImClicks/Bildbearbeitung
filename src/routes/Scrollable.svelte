@@ -27,9 +27,9 @@
 
 <div class="select-none w-full h-full overflow-hidden" on:wheel={onWheel}
      bind:clientWidth={outerWidth} bind:clientHeight={outerHeight}>
-    <section class="select-none absolute" style="left: {left}px; top: {top}px;
+    <div class="select-none absolute" style="left: {left}px; top: {top}px;
     transform: translate({translateX ? '-50%' : '0%'}, {translateY ? '-50%' : '0%'})" role="none"
     bind:clientWidth={slotWidth} bind:clientHeight={slotHeight}>
         <slot></slot>
-    </section>
+    </div>
 </div>

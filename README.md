@@ -1,8 +1,8 @@
 
 - [ ] slider
-- [ ] brush settings
-- [ ] zoom speed
-- [ ] black and white 
+- [x] zoom speed
+- [x] brush settings
+- [x] black and white 
 - [x] invert color
 - [x] color picker
 - [x] draggable
