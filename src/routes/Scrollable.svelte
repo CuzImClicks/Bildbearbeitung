@@ -1,5 +1,4 @@
 <script lang="ts">
-    import {innerHeight, innerWidth} from "./store";
 
     export let left: number = 0;
     export let top: number = 0;

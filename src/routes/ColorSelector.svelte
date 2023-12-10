@@ -1,6 +1,6 @@
 <script lang="ts">
     import ColorSelectorPixel from "./ColorSelectorPixel.svelte";
-    import {blue, green, red, innerHeight} from "./store";
+    import {blue, green, innerHeight, red} from "./store";
     import Draggable from "./Draggable.svelte";
 
     let colors = [

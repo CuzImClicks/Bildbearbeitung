@@ -1,7 +1,7 @@
 <script lang="ts">
 
     import Draggable from "./Draggable.svelte";
-    import {brushSize, brushType, innerHeight, innerWidth, outerWidth} from "./store";
+    import {brushSize, brushType, innerHeight} from "./store";
     import {brushes} from "./brushes";
 </script>
 

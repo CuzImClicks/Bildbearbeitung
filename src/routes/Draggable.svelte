@@ -1,6 +1,5 @@
 <script lang="ts">
-    import {innerHeight, innerWidth, outerWidth, outerHeight} from "./store.js";
-    import {onMount} from "svelte";
+    import {innerHeight, innerWidth} from "./store.js";
 
     export let left: number = 0;
     export let top: number = 0;

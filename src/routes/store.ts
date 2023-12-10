@@ -1,6 +1,5 @@
-
-import {writable} from 'svelte/store';
 import type {Writable} from 'svelte/store';
+import {writable} from 'svelte/store';
 
 export const red = writable(0);
 export const green = writable(0);

@@ -8,10 +8,10 @@
         mirrorVertically,
         rotate
     } from "./backend";
+    import type {Brush} from "./brushes";
     import {brushes} from "./brushes";
     import {brushType, darkenPercentage, image} from "./store";
     import NewImageMenu from "./NewImageMenu.svelte";
-    import type {Brush} from "./brushes";
 
     type MenuCategory = {
         name: string,

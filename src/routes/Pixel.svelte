@@ -1,8 +1,8 @@
 <script lang="ts">
 
     import {blue, brushSize, dragging, green, image, red} from "./store";
-    import { brush } from "./brushes";
-    
+    import {brush} from "./brushes";
+
     export let y: number;
     export let x: number;
     export let r: number;
