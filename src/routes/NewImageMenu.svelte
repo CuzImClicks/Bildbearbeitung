@@ -7,7 +7,7 @@
     let width = 16;
 </script>
 
-<div class="flex items-center bg-gray-600 rounded p-8 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 backdrop-blur z-50">
+<div class="flex items-center bg-gray-300 rounded p-8 absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 backdrop-blur z-50">
     <div>
         <div class="flex justify-between p-2">
             <span class="mr-4">Height:</span>

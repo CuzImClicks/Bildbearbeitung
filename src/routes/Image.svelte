@@ -9,13 +9,14 @@
         if (!event.ctrlKey) return;
         event.preventDefault();
 
-        sc += event.deltaY * -0.1;
-        sc = Math.min(Math.max(1, sc), 100);
+        sc = Math.max(10, sc + (event.deltaY / 50) * -2);
+        console.log(event.deltaY, sc);
+        sc = Math.min(sc, 50);
     }
 </script>
 
 <Scrollable top={$innerHeight / 2} left={$innerWidth / 2} translateX={true} translateY={true}
-            horizontalScrolling={true}>
+            horizontalScrolling={true} padding={sc}>
     <div class="flex justify-center items-center flex-col bg-gray-100 h-full w-full divide-y divide-gray-400 divide-opacity-50"
          on:wheel={zoom}>
         {#each $image as row, y}

@@ -1,5 +1,3 @@
-import { get } from "svelte/store"
-import { blue, green, red } from "./store"
 
 export function mirrorVertically(image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     for (let i = 0; i < image.length / 2; i++) {

@@ -6,6 +6,7 @@
     export let translateX = false;
     export let translateY = false;
     export let horizontalScrolling = false;
+    export let padding: number = 0;
 
     let slotHeight: number = 0;
     let slotWidth: number = 0;
@@ -16,9 +17,9 @@
         e.preventDefault()
         if (!e.ctrlKey) {
             if (e.shiftKey && horizontalScrolling) {
-                left = Math.max(slotWidth / 2, Math.min(outerWidth - (slotWidth / 2), left + e.deltaY));
+                left = Math.max(0-(slotWidth / 2) + padding, Math.min(outerWidth + (slotWidth / 2) - padding, left + e.deltaY));
             } else {
-                top = Math.max(slotHeight / 2, Math.min(outerHeight - (slotHeight / 2), top + e.deltaY));
+                top = Math.max(0-(slotHeight / 2) + padding, Math.min(outerHeight + (slotHeight / 2) - padding, top + e.deltaY));
             }
         }
     }
