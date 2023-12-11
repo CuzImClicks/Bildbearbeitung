@@ -1,5 +1,6 @@
 
 - [ ] slider
+- [ ] toggle grid
 - [x] zoom speed
 - [x] brush settings
 - [x] black and white 

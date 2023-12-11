@@ -137,6 +137,13 @@
                     },
                     display: "Darken",
                 },
+                //{
+                //    name: "lighten",
+                //    onClick: () => {
+                //        $image= darken(-$darkenPercentage, $image)
+                //    },
+                //    display: "Lighten",
+                //},
             ]
         },
         {
