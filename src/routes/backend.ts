@@ -61,11 +61,25 @@ export function darken(percentage: number, image:Array<Array<Array<number>>>): A
     return image;
 }
 
-export function invertColors(image:Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+export function invertColors(image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     for (let i = 0; i < image.length; i++) {
         for (let j = 0; j < image[0].length; j++) {
             image[i][j] = image[i][j].map((it) => 255 - it);
         }
     }
     return image;
+}
+
+export function isValidImage(image: Array<Array<Array<number>>>): boolean {
+    let len = image[0].length;
+    let prev = true;
+    return image.flatMap((it) => it.length == len).reduce((prev, cur) => prev && cur, prev);
+}
+
+export function stringToArray(text: string) {
+    return text.trim().replace("\r", "").split("\n").map((row) =>
+            row.trim().replace(/;$/, "").split(";").map((pixel) =>
+            pixel.trim().split(" ").map((color) => parseInt(color, 10))
+        )
+    );
 }
