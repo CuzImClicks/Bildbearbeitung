@@ -5,13 +5,7 @@
     import Navbar from "./Navbar.svelte";
     import {dragging, image, innerHeight, innerWidth, outerHeight, outerWidth} from "./store";
     import BrushSettings from "./BrushSettings.svelte";
-
-    //[
-        //[[0, 0, 0], [148, 0, 211], [75, 0, 130], [0, 0, 255], [0, 255, 0], [255, 255, 0], [255, 127, 0], [255, 0, 0], [255, 255, 255]],
-        //[[255, 255, 255], [0, 0, 255], [255, 0, 0], [255, 127, 0], [255, 255, 0], [0, 255, 0], [0, 0, 255], [148, 0, 211], [0, 0, 0]],
-        //]
-    // 255 255 255; 0 0 0; 0 0 255;
-    // 255 255 255; 0 0 0; 0 0 255;
+    import LoadFile from "./LoadFile.svelte";
 
     $: $outerWidth = 0
     $: $innerWidth = 0

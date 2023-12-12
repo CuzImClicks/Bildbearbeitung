@@ -3,15 +3,20 @@
         blackAndWhite,
         darken,
         invertColors,
+        isValidImage,
         mirrorDiagonally,
         mirrorHorizontally,
         mirrorVertically,
-        rotate
+        rotate,
+
+        stringToArray
+
     } from "./backend";
     import type {Brush} from "./brushes";
     import {brushes} from "./brushes";
     import {brushType, darkenPercentage, image} from "./store";
     import NewImageMenu from "./NewImageMenu.svelte";
+    import LoadFile from "./LoadFile.svelte";
 
     type MenuCategory = {
         name: string,
@@ -31,6 +36,7 @@
     let editMenuVisible = false;
     let brushesMenuVisible = false;
     let newImageMenuVisible = false;
+    let loadImageMenuVisible = false;
 
     let menuCategories: Array<MenuCategory> = [
         {
@@ -54,20 +60,22 @@
                     onClick: () => {
                         navigator.clipboard.readText()
                             .then(((t) => {
-                                let temp = t.trim().replace("\r", "").split("\n").map((row) =>
-                                    row.trim().replace(/;$/, "").split(";").map((pixel) =>
-                                        pixel.trim().split(" ").map((color) => parseInt(color, 10))
-                                    )
-                                );
-                                let len = temp[0].length;
-                                let prev = true;
-                                if (!temp.flatMap((it) => it.length == len).reduce((prev, cur) => prev && cur, prev)) {
+                                let temp = stringToArray(t);
+                                if (!isValidImage(temp)) {
                                     return;
                                 }
+                                console.log(temp);
                                 $image = temp;
                             }))
                     },
                     display: "Load from clipboard",
+                },
+                {
+                    name: "load from file",
+                    onClick: () => {
+                        loadImageMenuVisible = true;
+                    },
+                    display: "Load from file",
                 },
                 {
                     name: "Export to clipboard",
@@ -192,4 +200,7 @@
 </nav>
 {#if newImageMenuVisible}
     <NewImageMenu bind:visible={newImageMenuVisible} />
+{/if}
+{#if loadImageMenuVisible}
+    <LoadFile bind:visible={loadImageMenuVisible} />
 {/if}
