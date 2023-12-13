@@ -6,7 +6,7 @@ import {get} from "svelte/store";
  */
 export type Brush = {
     name: string,
-    brush: (x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>) => Array<Array<Array<number>>>,
+    brush: (x: number, y: number, brushSize: number, image: Array<Array<Array<number>>>) => Array<Array<Array<number>>>,
     brushType: string
 }
 
@@ -38,7 +38,7 @@ export const brushes: Array<Brush> = [
  * @param brushSize Der Radius des Kreises
  * @param image Das Bild, auf dem gezeichnet werden soll
  */
-export function circleBrush(x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+export function circleBrush(x: number, y: number, brushSize: number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     let minX = Math.max(0, x-brushSize);                // 0 oder x-brushSize als obere linke Ecke
     let maxX = Math.min(image[0].length, x+brushSize +1);      // Die Breite des Bildes oder x+brushSize+1 als obere rechte Ecke
     let minY = Math.max(0, y-brushSize);                // 0 oder y-brushSize als untere linke Ecke
@@ -60,7 +60,7 @@ export function circleBrush(x:number, y:number, brushSize:number, image: Array<A
  * @param brushSize Der Abstand vom Mittelpunkt zu den Seiten
  * @param image Das Bild, auf dem gezeichnet werden soll
  */
-export function squareBrush(x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+export function squareBrush(x: number, y: number, brushSize: number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     let minX = 0;
     let maxX = image[0].length
     let minY = 0;
@@ -82,12 +82,12 @@ export function squareBrush(x:number, y:number, brushSize:number, image: Array<A
  * @param brushSize
  * @param image
  */
-export function fill(x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+export function fill(x: number, y: number, brushSize: number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     let blocks: number[][] = []; // Alle Blöcke die gefüllt werden sollen
     let queue: number[][] = [[x, y]]; // Alle Blöcke die noch überprüft werden müssen
     let checked: number[][] = []; // Alle Blöcke die schon überprüft wurden
     let start = image[y][x]; // Die Farbe des Startpunktes
-    while (queue.length > 0 && blocks.length < 1000) { // Solange noch Blöcke überprüft werden müssen und die maximale Anzahl an Blöcken noch nicht erreicht wurde
+    while (queue.length > 0 && blocks.length < 10000) { // Solange noch Blöcke überprüft werden müssen und die maximale Anzahl an Blöcken noch nicht erreicht wurde
         let block = queue.shift();
         if (block === undefined
             || block.length !== 2
@@ -124,7 +124,7 @@ export function fill(x:number, y:number, brushSize:number, image: Array<Array<Ar
 /**
  * Zeichnet mit dem Pinsel an der Stelle (x|y) auf das Bild
  */
-export function brush(x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+export function brush(x: number, y: number, brushSize: number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
     const type = brushes.find((it:Brush) => it.brushType === get(brushType));
     if (type) {
         return type.brush(x, y, brushSize, image);

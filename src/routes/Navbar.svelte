@@ -189,7 +189,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
 </script>
 
 <nav class="select-none">
-    <div class="w-full h-max border-b-2" style="border-color: rgb({$red},{$green}, {$blue})">
+    <div class="w-full h-max border-b-2" style="border-color: rgb({$red},{$green},{$blue})">
         <ul class="flex flex-row">
             {#each menuCategories as category}
                 <li class="list-none w-max">
