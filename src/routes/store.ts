@@ -48,7 +48,6 @@ export const innerHeight = writable(0);
 let stored = [[[0,0,0]]];
 if (browser) {
     let image = localStorage["image"];
-    console.log("loading", image);
     if (image !== undefined) {
         stored = JSON.parse(image);
     }
@@ -57,6 +56,5 @@ export const image: Writable<Array<Array<Array<number>>>> = writable(stored);
 image.subscribe((value) => {
     if (browser) {
         localStorage["image"] = JSON.stringify(value);
-        console.log("saved", localStorage["image"]);
     }
 })
