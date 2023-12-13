@@ -12,7 +12,6 @@
 </script>
 
 <div class="caret-transparent p-0 m-0 cursor-crosshair" style="height: {size}px; width: {size}px; background-color: rgb({r}, {g}, {b});"
-        on:click="{() => {r=$red; g=$green; b=$blue}}"
         on:mousedown={(event) => {
             event.preventDefault(); // Verhindert, dass der Browser das Element verschiebt
 

@@ -181,7 +181,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
 </script>
 
 <nav class="select-none">
-    <div class="w-full h-max border-b-[2px]">
+    <div class="w-full h-max border-b-2">
         <ul class="flex flex-row">
             {#each menuCategories as category}
                 <li class="list-none w-max">

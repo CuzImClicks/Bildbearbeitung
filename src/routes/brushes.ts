@@ -23,7 +23,12 @@ export const brushes: Array<Brush> = [
         name: 'Square',
         brush: squareBrush,
         brushType: 'square'
-    }
+    },
+    {
+        name: 'Fill',
+        brush: fill,
+        brushType: 'fill'
+    },
 ];
 
 /**
@@ -66,6 +71,52 @@ export function squareBrush(x:number, y:number, brushSize:number, image: Array<A
                 image[i][j] = [get(red), get(green), get(blue)];
             }
         }
+    }
+    return image;
+}
+
+/**
+ * Füllt den Bereich von allen Pixeln mit der gleichen Farbe um den Punkt (x|y) mit der Farbe des Pinsels
+ * @param x
+ * @param y
+ * @param brushSize
+ * @param image
+ */
+export function fill(x:number, y:number, brushSize:number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
+    let blocks: number[][] = []; // Alle Blöcke die gefüllt werden sollen
+    let queue: number[][] = [[x, y]]; // Alle Blöcke die noch überprüft werden müssen
+    let checked: number[][] = []; // Alle Blöcke die schon überprüft wurden
+    let start = image[y][x]; // Die Farbe des Startpunktes
+    while (queue.length > 0 && blocks.length < 1000) { // Solange noch Blöcke überprüft werden müssen und die maximale Anzahl an Blöcken noch nicht erreicht wurde
+        let block = queue.shift();
+        if (block === undefined
+            || block.length !== 2
+            || block[0] < 0
+            || block[0] >= image[0].length
+            || block[1] < 0
+            || block[1] >= image.length
+            || checked.includes(block)) { // Wenn der Block nicht existiert, ungültig ist oder schon überprüft wurde
+            continue;
+        }
+        let color = image[block[1]][block[0]]; // Die Farbe des aktuellen Blocks
+
+        if (color[0] !== start[0] || color[1] !== start[1] || color[2] !== start[2]
+            // @ts-ignore because we know the length is 2
+        || blocks.findIndex((it) => it[0] === block[0] && it[1] === block[1]) !== -1) {
+            // Wenn die Farbe des Blocks nicht der Startfarbe entspricht oder der Block schon in der Liste ist
+            checked.push(block); // Block als überprüft markieren
+            continue;
+        }
+        blocks.push(block); // Block zur Liste hinzufügen
+        let additional = [[block[0] + 1, block[1]], [block[0] - 1, block[1]], [block[0], block[1] + 1], [block[0], block[1] - 1]];
+        for (let n of additional) { // eigentlich nicht notwendig aber Javascript überprüft, ob dasselbe Objekt schon in der Liste ist und nicht das Gleiche
+            if (!queue.includes(n) && !checked.includes(n)) {
+                queue.push(n);
+            }
+        }
+    }
+    for (let block of blocks) {
+        image[block[1]][block[0]] = [get(red), get(green), get(blue)]; // Alle Blöcke mit der Farbe des Pinsels füllen
     }
     return image;
 }
