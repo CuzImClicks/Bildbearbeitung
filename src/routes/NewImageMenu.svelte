@@ -1,3 +1,6 @@
+<!--
+Ein Fenster wo die Höhe und Breite eines neuen Bildes verändert werden kann.
+-->
 <script lang="ts">
     import {blue, green, image, red} from "./store";
 

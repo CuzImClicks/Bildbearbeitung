@@ -1,5 +1,7 @@
+<!--
+Ermöglicht es den Nutzer eine Datei auszuwählen und als Bild zu importieren.
+-->
 <script lang="ts">
-    import Image from "./Image.svelte";
     import { isValidImage, stringToArray } from "./backend";
     import { image } from "./store";
 
@@ -8,12 +10,12 @@
     let files: FileList;
     $: if (files) {
         files[0].text().then((v) => {
-            let img = stringToArray(v);
-            if (!isValidImage(img)) {
+            let img = stringToArray(v); // Konvertiert den String in ein Array
+            if (!isValidImage(img)) { // Prüft, ob das Array ein gültiges Bild ist
                 return;
             }
-            $image = img;
-            visible = false;
+            $image = img; // Speichert das Bild in der Variable
+            visible = false; // Schließt das Fenster
         });
     }
 </script>

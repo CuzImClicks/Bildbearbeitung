@@ -1,5 +1,9 @@
-<script lang="ts">
+<!--
+Ein verschiebbares Fenster mit den Pinsel-Einstellungen wie Pinselgröße und Pinselart.
+Verändert die globalen Variablen $brushSize und $brushType.
+-->
 
+<script lang="ts">
     import Draggable from "./Draggable.svelte";
     import {brushSize, brushType, innerHeight} from "./store";
     import {brushes} from "./brushes";

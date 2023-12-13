@@ -1,3 +1,7 @@
+<!--
+Die Navigationsleiste am oberen Bildschirmrand.
+-->
+
 <script lang="ts">
     import {
         blackAndWhite,
@@ -8,9 +12,7 @@
         mirrorHorizontally,
         mirrorVertically,
         rotate,
-
         stringToArray
-
     } from "./backend";
     import type {Brush} from "./brushes";
     import {brushes} from "./brushes";
@@ -18,6 +20,10 @@
     import NewImageMenu from "./NewImageMenu.svelte";
     import LoadFile from "./LoadFile.svelte";
 
+    /**
+     * Definiert eine Kategorie im Menü.
+     * Hat eine Liste von Untermenüpunkten.
+     */
     type MenuCategory = {
         name: string,
         display: string,
@@ -26,11 +32,16 @@
         children: Array<MenuItem>
     }
 
+    /**
+     * Definiert einen Menüpunkt.
+     */
     type MenuItem = {
         name: string,
         onClick: () => void,
         display: string,
     }
+
+    // ob die Menüs angezeigt werden sollen
 
     let fileMenuVisible = false;
     let editMenuVisible = false;
@@ -38,12 +49,14 @@
     let newImageMenuVisible = false;
     let loadImageMenuVisible = false;
 
+    /**
+     * Die Liste der Menükategorien mit ihren Untermenüpunkten.
+     */
     let menuCategories: Array<MenuCategory> = [
         {
             name: "file",
             display: "File",
             action: () => {
-                console.log("file");
             },
             visible: fileMenuVisible,
             children: [
@@ -51,20 +64,18 @@
                     name: "new",
                     onClick: () => {
                         newImageMenuVisible = true;
-                        //image = Array.from({length: 16}, () => Array.from({length: 16}, () => [255, 255, 255]));
                     },
                     display: "New",
                 },
                 {
                     name: "load from clipboard",
                     onClick: () => {
-                        navigator.clipboard.readText()
+                        navigator.clipboard.readText() // liest den Inhalt der Zwischenablage
                             .then(((t) => {
-                                let temp = stringToArray(t);
-                                if (!isValidImage(temp)) {
+                                let temp = stringToArray(t);  // wandelt den Inhalt in ein Bild um
+                                if (!isValidImage(temp)) { // überprüft, ob das Bild ein Rechteck ist
                                     return;
                                 }
-                                console.log(temp);
                                 $image = temp;
                             }))
                     },
@@ -81,7 +92,7 @@
                     name: "Export to clipboard",
                     onClick: () => {
                         navigator.clipboard.writeText(
-                            $image.map((row) => row.map((pixel) => pixel.join(" ")).join(";")).join("\n")
+                            $image.map((row) => row.map((pixel) => pixel.join(" ")).join(";")).join("\n") // exportiert das Bild als Text
                         );
                     },
                     display: "Export to clipboard",
@@ -92,10 +103,9 @@
             name: "edit",
             display: "Edit",
             action: () => {
-                console.log("file");
             },
             visible: editMenuVisible,
-            children: [
+            children: [ // Gibt jeder Funktion einen Namen, der im Menü angezeigt wird
                 {
                     name: "flip horizontally",
                     onClick: () => {
@@ -148,7 +158,7 @@
                 {
                     name: "lighten",
                     onClick: () => {
-                        $image= darken(-$darkenPercentage, $image)
+                        $image= darken(-$darkenPercentage, $image) // aufhellen ist nur verdunkeln mit negativem Wert :)
                     },
                     display: "Lighten",
                 },
@@ -162,7 +172,7 @@
             children: brushes.map((brush: Brush) => ({
                 name: brush.name,
                 onClick: () => {
-                    $brushType = brush.brushType;
+                    $brushType = brush.brushType; // Alternative zum Brush Fenster
                 },
                 display: brush.name,
             }))
@@ -198,6 +208,7 @@
         </ul>
     </div>
 </nav>
+<!-- Die Fenster sollen nur sichtbar sein wenn sie aufgerufen werden. -->
 {#if newImageMenuVisible}
     <NewImageMenu bind:visible={newImageMenuVisible} />
 {/if}

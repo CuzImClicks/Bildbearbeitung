@@ -74,3 +74,7 @@ old load
             <div class="border-b-2 mb-2">Henrik, Kai</div>
         </div>
 ```
+
+```sveltehtml
+<div on:contextmenu={(e) => {e.preventDefault()}} />
+```

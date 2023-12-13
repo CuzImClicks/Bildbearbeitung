@@ -1,26 +1,32 @@
+<!--
+Ermöglicht es den Inhalt durch Ziehen zu verschieben.
+Respektiert die Grenzen des Fensters.
+-->
 <script lang="ts">
     import {innerHeight, innerWidth} from "./store.js";
 
-    export let left: number = 0;
-    export let top: number = 0;
+    export let left: number = 0; // Abstand vom linken Rand
+    export let top: number = 0; // Abstand vom oberen Rand
 
-    let moving = false;
-    let slotWidth: number = 0;
-    let slotHeight: number = 0;
+    let moving = false; // Wird gerade gezogen?
+    let slotWidth: number = 0; // Breite des Inhalts
+    let slotHeight: number = 0; // Höhe des Inhalts
 
     function onMouseDown() {
-        moving = true;
+        moving = true; // Ziehen beginnt
     }
 
     function onMouseMove(e: MouseEvent) {
-        if (moving) {
-            left = Math.max(0, Math.min($innerWidth - (slotWidth ), left + e.movementX));
-            top = Math.max(0, Math.min($innerHeight - (slotHeight), top + e.movementY));
+        if (moving) { // Falls gezogen wird
+            left = Math.max(0, Math.min($innerWidth - slotWidth, left + e.movementX));
+            // Verschiebe den Inhalt um die x-Bewegung des Mauszeigers und beachte die Grenzen des Fensters
+            top = Math.max(0, Math.min($innerHeight - slotHeight, top + e.movementY));
+            // Verschiebe den Inhalt um die y-Bewegung des Mauszeigers und beachte die Grenzen des Fensters
         }
     }
 
     function onMouseUp() {
-        moving = false;
+        moving = false; // Ziehen endet
     }
 </script>
 

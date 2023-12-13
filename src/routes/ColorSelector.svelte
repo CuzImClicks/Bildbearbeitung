@@ -1,8 +1,12 @@
+<!--
+Ein verschiebbares Element welches den Nutzer erlaubt die aktuelle Farbe des Pinsels auszuwählen.
+-->
 <script lang="ts">
     import ColorSelectorPixel from "./ColorSelectorPixel.svelte";
     import {blue, green, innerHeight, red} from "./store";
     import Draggable from "./Draggable.svelte";
 
+    // Die Farben die zur Auswahl stehen
     let colors = [
         [0,0,0],
         [255,255,255],
