@@ -78,3 +78,5 @@ old load
 ```sveltehtml
 <div on:contextmenu={(e) => {e.preventDefault()}} />
 ```
+
+https://stackoverflow.com/questions/28405619/javascript-array-to-png-client-side

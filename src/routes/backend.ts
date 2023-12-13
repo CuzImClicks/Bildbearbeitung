@@ -1,3 +1,6 @@
+import {image} from "./store";
+import {get} from "svelte/store";
+
 /**
  * Spiegelt das Bild an einer horizontalen Achse
  * @param image Das Bild, welches gespiegelt werden soll
@@ -118,4 +121,43 @@ export function stringToArray(text: string) {
             pixel.trim().split(" ").map((color) => parseInt(color, 10)) // Teilt den String an jedem Leerzeichen auf und konvertiert die Farbwerte in Zahlen
         )
     );
+}
+
+
+/**
+ * Konvertiert ein dreidimensionales Array zu einem png Bild als Base64 String
+ * @param pixelSize
+ * @param image
+ */
+export function exportImage(pixelSize: number, image: Array<Array<Array<number>>>): string {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (ctx === null) {
+        throw new Error("Canvas context is null");
+    }
+    canvas.height = image.length*pixelSize;
+    canvas.width = image[0].length*pixelSize;
+    ctx.clearRect(pixelSize, pixelSize, canvas.width, canvas.height);
+    ctx.imageSmoothingEnabled = false;
+    for(let y = 0; y < image.length; y++) {
+        for (let x = 0; x < image[y].length; x++) {
+            let color = image[y][x];
+            ctx.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+            ctx.fillRect(x*pixelSize, y*pixelSize, pixelSize, pixelSize);
+        }
+    }
+    return canvas.toDataURL("image/png");
+}
+
+export function download(filename: string, text: string) {
+    const element = document.createElement('a');
+    element.setAttribute('href', text);
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
 }

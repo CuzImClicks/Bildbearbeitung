@@ -5,7 +5,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
 <script lang="ts">
     import {
         blackAndWhite,
-        darken,
+        darken, download, exportImage,
         invertColors,
         isValidImage,
         mirrorDiagonally,
@@ -16,7 +16,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
     } from "./backend";
     import type {Brush} from "./brushes";
     import {brushes} from "./brushes";
-    import {brushType, darkenPercentage, image} from "./store";
+    import {blue, brushType, darkenPercentage, green, image, red} from "./store";
     import NewImageMenu from "./NewImageMenu.svelte";
     import LoadFile from "./LoadFile.svelte";
 
@@ -89,13 +89,21 @@ Die Navigationsleiste am oberen Bildschirmrand.
                     display: "Load from file",
                 },
                 {
-                    name: "Export to clipboard",
+                    name: "export to clipboard",
                     onClick: () => {
                         navigator.clipboard.writeText(
                             $image.map((row) => row.map((pixel) => pixel.join(" ")).join(";")).join("\n") // exportiert das Bild als Text
                         );
                     },
                     display: "Export to clipboard",
+                },
+                {
+                    name: "export to png",
+                    onClick: () => {
+                        let content = exportImage(10, $image);
+                        download("image.png", content);
+                    },
+                    display: "Export to png",
                 }
             ]
         },
@@ -181,7 +189,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
 </script>
 
 <nav class="select-none">
-    <div class="w-full h-max border-b-2">
+    <div class="w-full h-max border-b-2" style="border-color: rgb({$red},{$green}, {$blue})">
         <ul class="flex flex-row">
             {#each menuCategories as category}
                 <li class="list-none w-max">
