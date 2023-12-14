@@ -17,7 +17,7 @@ Die Sammlung an Pixeln ist in einer Scrollable Komponente eingebettet, die es er
         if (!event.ctrlKey) return; // Nur wenn die Strg-Taste gedrückt ist
         event.preventDefault(); // Verhindert das Scrollen/Zoomen der Seite
 
-        sc = Math.min(Math.max(10, sc + (event.deltaY / 50) * -2), 50);
+        sc = Math.min(Math.max(8, sc + (event.deltaY / 50) * -2), 50);
         // Teilt die Scroll-Distanz durch 50 und multipliziert sie mit -2, um die Pixelgröße zu verändern.
         // Begrenzt die Pixelgröße auf 10 bis 50.
     }

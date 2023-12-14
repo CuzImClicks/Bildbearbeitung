@@ -1,6 +1,7 @@
 import type {Writable} from 'svelte/store';
 import {writable} from 'svelte/store';
 import {browser} from "$app/environment";
+import {get} from "svelte/store";
 
 /**
  * Enthält alle globalen Variablen, die von mehreren Komponenten verwendet werden.
@@ -39,6 +40,7 @@ export const outerWidth = writable(0);
 export const outerHeight = writable(0);
 export const innerWidth = writable(0);
 export const innerHeight = writable(0);
+export const history: Writable<Array<Array<Array<Array<number>>>>> = writable([]);
 
 /**
  * 3D Array: [x][y][r,g,b]
@@ -57,4 +59,8 @@ image.subscribe((value) => {
     if (browser) {
         localStorage["image"] = JSON.stringify(value);
     }
-})
+    
+    let h = get(history);
+    h.push(JSON.parse(JSON.stringify(value)));
+    history.set(h);
+});

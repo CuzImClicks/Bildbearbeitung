@@ -125,7 +125,7 @@ export function fill(x: number, y: number, brushSize: number, image: Array<Array
  * Zeichnet mit dem Pinsel an der Stelle (x|y) auf das Bild
  */
 export function brush(x: number, y: number, brushSize: number, image: Array<Array<Array<number>>>): Array<Array<Array<number>>> {
-    const type = brushes.find((it:Brush) => it.brushType === get(brushType));
+    const type = brushes.find((it:Brush) => it.brushType === get(brushType)); // Findet die richtige Rechnung für den gwünschten Pinsel
     if (type) {
         return type.brush(x, y, brushSize, image);
     }

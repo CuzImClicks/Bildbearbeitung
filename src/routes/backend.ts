@@ -124,7 +124,7 @@ export function stringToArray(text: string) {
 }
 
 /**
- * Konvertiert ein dreidimensionales Array zu einem png Bild als Base64 String
+ * Konvertiert ein dreidimensionales Array zu einem png Bild
  * @param pixelSize
  * @param image
  */

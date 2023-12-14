@@ -16,7 +16,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
     } from "./backend";
     import type {Brush} from "./brushes";
     import {brushes} from "./brushes";
-    import {blue, brushType, darkenPercentage, green, image, red} from "./store";
+    import {blue, brushType, darkenPercentage, green, image, red, history} from "./store";
     import NewImageMenu from "./NewImageMenu.svelte";
     import LoadFile from "./LoadFile.svelte";
 
@@ -48,6 +48,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
     let brushesMenuVisible = false;
     let newImageMenuVisible = false;
     let loadImageMenuVisible = false;
+    let undoMenuVisible = false;
 
     /**
      * Die Liste der Menükategorien mit ihren Untermenüpunkten.
@@ -185,6 +186,21 @@ Die Navigationsleiste am oberen Bildschirmrand.
                 display: brush.name,
             }))
         },
+        {
+            name: "undo",
+            display: "Undo",
+            action: () => {
+                $history.pop();
+                
+                
+                let v = $history.pop();
+                if(v !== undefined) {
+                    $image = v;
+                }
+            },
+            visible: undoMenuVisible,
+            children: []
+        },
     ];
 </script>
 
@@ -198,6 +214,7 @@ Die Navigationsleiste am oberen Bildschirmrand.
                             if (cat.name !== category.name) cat.visible = false;
                         }
                         category.visible = !category.visible
+                        category.action();
                     }}>{category.display}</button>
                     {#if category.visible}
                         <ul class="flex items-stretch flex-col absolute h-max bg-gray-200 z-50">
